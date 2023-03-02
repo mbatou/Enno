@@ -1,3 +1,18 @@
 <resources>
     <string name="app_name">Enno</string>
+    <string name="enter_the_space">Enter the space</string>
+    <string name="login_intro_text">Feel free to express yourself! No taboo , no violence , no shame! But please we respect each other here.</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="anonymousid">/@/AnonymousID</string>
+    <string name="text_sample_post">Here is the text that is supposed to be displayed directly when a user is sending a new post.</string>
+    <string name="position_user">position_user</string>
+    <string name="time_sample">Now</string>
+    <string name="position_sample">Very close</string>
+    <string name="like_post">like post</string>
+    <string name="sample_likes">123</string>
+    <string name="add_new_post">add new post</string>
+    <string name="post_creation_hint">Share all your thoughts freely and talk to the community</string>
+    <string name="back">Back</string>
+    <string name="post">Post</string>
 </resources>

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "892569775662",
+    "project_id": "enno-app-45c63",
+    "storage_bucket": "enno-app-45c63.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:892569775662:android:e03c9f1658766993c379bf",
+        "android_client_info": {
+          "package_name": "com.georges.enno"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "892569775662-quhjbi095ctv4uunkoblfmdtv9bnk6oj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDCYMWWaJCeQbwf9mluIYppglvYg81zfus"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "892569775662-quhjbi095ctv4uunkoblfmdtv9bnk6oj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

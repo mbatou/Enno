@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/feed"
+        android:icon="@drawable/enno_logo"
+        tools:ignore="MenuTitle" />
+
+    <item
+        android:id="@+id/chat"
+        android:icon="@drawable/chat_ic"
+        tools:ignore="MenuTitle" />
+
+    <item
+        android:id="@+id/notifications"
+        android:icon="@drawable/notifications_ic"
+        tools:ignore="MenuTitle" />
+
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/profile_ic"
+        tools:ignore="MenuTitle" />
+
+</menu>
