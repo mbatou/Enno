@@ -3,6 +3,7 @@ package com.georges.enno;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
+import android.content.res.ColorStateList;
 import android.os.Bundle;
 
 import com.georges.enno.fragments.FragmentChat;

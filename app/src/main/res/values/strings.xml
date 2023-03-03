@@ -15,4 +15,6 @@
     <string name="post_creation_hint">Share all your thoughts freely and talk to the community</string>
     <string name="back">Back</string>
     <string name="post">Post</string>
+    <string name="options">Options</string>
+    <string name="hint_chat_sample">Share your thoughts following the community guidelines.</string>
 </resources>

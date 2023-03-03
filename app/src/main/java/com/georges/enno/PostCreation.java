@@ -3,8 +3,10 @@ package com.georges.enno;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
@@ -14,8 +16,7 @@ import java.util.Objects;
 
 public class PostCreation extends AppCompatActivity {
     private EditText postEditText;
-
-    TextView postButton;
+    private TextView postButton;
     private DatabaseReference postsRef;
 
     @Override
@@ -48,6 +49,8 @@ public class PostCreation extends AppCompatActivity {
             // Save the post to the Realtime Database
             assert postId != null;
             postsRef.child(postId).setValue(post);
+
+            Toast.makeText(this, "Post published !", Toast.LENGTH_SHORT).show();
 
             // Finish the activity and go back to the main activity
             finish();

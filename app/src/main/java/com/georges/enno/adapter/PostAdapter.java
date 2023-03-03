@@ -1,8 +1,10 @@
 package com.georges.enno.adapter;
 
+import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -11,12 +13,15 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.georges.enno.Post;
 import com.georges.enno.R;
 
+import java.util.Collections;
 import java.util.List;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private final List<Post> posts;
 
     public PostAdapter(List<Post> posts) {
+        // Sort the posts in descending order based on their post time
+        Collections.sort(posts, (p1, p2) -> Long.compare(p2.getPostTime(), p1.getPostTime()));
         this.posts = posts;
     }
 
@@ -27,6 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         return new PostViewHolder(view);
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
         // Get the post at the current position
@@ -34,8 +40,21 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
         // Bind the data to the views
         holder.postTextView.setText(post.getContent());
-        holder.authorTextView.setText(post.getAuthorId());
+        holder.authorTextView.setText(post.getAuthorId().substring(0, 8));
         holder.timeTextView.setText(getFormattedTime(post.getPostTime()));
+        holder.likesTextView.setText(Integer.toString(post.getLikes()));
+        holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
+
+        // Set click listeners for the like and dislike buttons
+        holder.likeButton.setOnClickListener(view -> {
+            post.like();
+            holder.likesTextView.setText(Integer.toString(post.getLikes()));
+        });
+
+        holder.dislikeButton.setOnClickListener(view -> {
+            post.dislike();
+            holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
+        });
     }
 
     @Override
@@ -65,6 +84,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     }
 
     static class PostViewHolder extends RecyclerView.ViewHolder {
+
+        ImageView likeButton;
+        ImageView dislikeButton;
+        TextView likesTextView;
+        TextView dislikesTextView;
         TextView postTextView;
         TextView authorTextView;
         TextView timeTextView;
@@ -74,6 +98,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             postTextView = itemView.findViewById(R.id.feed_card_content);
             authorTextView = itemView.findViewById(R.id.feed_card_id);
             timeTextView = itemView.findViewById(R.id.feed_card_time);
+            likeButton = itemView.findViewById(R.id.like_post);
+            dislikeButton = itemView.findViewById(R.id.dislike_post);
+            likesTextView = itemView.findViewById(R.id.post_card_number_likes);
+            dislikesTextView = itemView.findViewById(R.id.post_card_number_dislikes);
         }
-    }
-}
+
+    }}
