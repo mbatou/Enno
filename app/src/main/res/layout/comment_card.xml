@@ -1,17 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/feed_card"
+        android:id="@+id/comment_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="5dp"
         app:cardBackgroundColor="@color/bg_app_primary_color"
-        app:cardCornerRadius="10dp"
         app:contentPadding="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -23,7 +22,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/feed_card_id"
+                android:id="@+id/comment_card_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anonymousid"
@@ -39,11 +38,11 @@
                 android:layout_height="18dp"
                 android:contentDescription="@string/position_user"
                 android:src="@drawable/position_ic"
-                app:layout_constraintLeft_toRightOf="@id/feed_card_id"
+                app:layout_constraintLeft_toRightOf="@id/comment_card_id"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_card_position"
+                android:id="@+id/comment_card_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/position_sample"
@@ -53,7 +52,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_card_content"
+                android:id="@+id/comment_card_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -62,29 +61,30 @@
                 android:textSize="@dimen/H2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feed_card_id" />
+                app:layout_constraintTop_toBottomOf="@id/comment_card_id" />
 
             <ImageView
-                android:id="@+id/feed_card_dot_separator"
+                android:id="@+id/comment_card_dot_separator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/separator"
                 android:src="@drawable/dot_small_svgrepo_com"
-                app:layout_constraintLeft_toRightOf="@id/feed_card_position"
-                app:layout_constraintRight_toLeftOf="@+id/feed_card_time"
+                app:layout_constraintLeft_toRightOf="@id/comment_card_position"
+                app:layout_constraintRight_toLeftOf="@+id/comment_card_time"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_card_time"
+                android:id="@+id/comment_card_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_sample"
                 android:textColor="@color/gray_color"
                 android:textSize="@dimen/p1"
-                app:layout_constraintLeft_toRightOf="@+id/feed_card_dot_separator"
+                app:layout_constraintLeft_toRightOf="@+id/comment_card_dot_separator"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/comment_card_options"
                 android:layout_width="18dp"
                 android:layout_height="17dp"
                 android:contentDescription="@string/options"
@@ -93,7 +93,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/like_post"
+                android:id="@+id/like_comment"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -101,39 +101,18 @@
                 android:src="@drawable/like_ic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feed_card_content" />
+                app:layout_constraintTop_toBottomOf="@+id/comment_card_content" />
 
             <TextView
-                android:id="@+id/post_card_number_likes"
+                android:id="@+id/comment_card_number_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:text="@string/sample_likes"
                 android:textColor="@color/gray_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/like_post" />
+                app:layout_constraintRight_toLeftOf="@+id/like_comment" />
 
-
-            <ImageView
-                android:id="@+id/dislike_post"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:contentDescription="@string/like_post"
-                android:src="@drawable/dislike_ic"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feed_card_content" />
-
-            <TextView
-                android:id="@+id/post_card_number_dislikes"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="3dp"
-                android:text="@string/sample_likes"
-                android:textColor="@color/gray_color"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/dislike_post" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>

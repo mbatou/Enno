@@ -1,4 +1,4 @@
-package com.georges.enno;
+package com.georges.enno.ressources;
 
 public class Post {
     private String id;

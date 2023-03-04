@@ -15,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.georges.enno.Post;
+import com.georges.enno.ressources.Post;
 import com.georges.enno.PostCreation;
 import com.georges.enno.R;
 import com.georges.enno.adapter.PostAdapter;

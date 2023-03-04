@@ -1,6 +1,7 @@
 package com.georges.enno.adapter;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,7 +11,8 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.georges.enno.Post;
+import com.georges.enno.ressources.CommentOpened;
+import com.georges.enno.ressources.Post;
 import com.georges.enno.R;
 
 import java.util.Collections;
@@ -54,6 +56,20 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.dislikeButton.setOnClickListener(view -> {
             post.dislike();
             holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
+        });
+
+        // Set click listener for the whole item view
+        holder.itemView.setOnClickListener(v -> {
+            // Create intent for the new activity
+            Intent intent = new Intent(v.getContext(), CommentOpened.class);
+            intent.putExtra("content", post.getContent());
+            intent.putExtra("author", post.getAuthorId());
+            intent.putExtra("time", post.getPostTime());
+            intent.putExtra("likes", post.getLikes());
+            intent.putExtra("dislikes", post.getDislikes());
+
+            // Start the new activity
+            v.getContext().startActivity(intent);
         });
     }
 

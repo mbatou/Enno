@@ -3,27 +3,38 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent"
+    android:background="@color/bg_app_secondary_color"
+    tools:context=".ressources.CommentOpened">
+
 
     <androidx.cardview.widget.CardView
-        android:id="@+id/feed_card"
+        android:id="@+id/feed_card_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         app:cardBackgroundColor="@color/bg_app_primary_color"
-        app:cardCornerRadius="10dp"
         app:contentPadding="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
+        <ImageView
+            android:id="@+id/go_back_comment"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:contentDescription="@string/back"
+            android:src="@drawable/back_ic"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:layout_marginTop="30dp">
 
             <TextView
-                android:id="@+id/feed_card_id"
+                android:id="@+id/feed_card_comment_id"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/anonymousid"
@@ -34,26 +45,26 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/position_ic"
+                android:id="@+id/position_comment_ic"
                 android:layout_width="18dp"
                 android:layout_height="18dp"
                 android:contentDescription="@string/position_user"
                 android:src="@drawable/position_ic"
-                app:layout_constraintLeft_toRightOf="@id/feed_card_id"
+                app:layout_constraintLeft_toRightOf="@id/feed_card_comment_id"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_card_position"
+                android:id="@+id/feed_card_comment_position"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/position_sample"
                 android:textColor="@color/gray_color"
                 android:textSize="13sp"
-                app:layout_constraintLeft_toRightOf="@id/position_ic"
+                app:layout_constraintLeft_toRightOf="@id/position_comment_ic"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_card_content"
+                android:id="@+id/feed_card_comment_content"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
@@ -62,29 +73,30 @@
                 android:textSize="@dimen/H2"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/feed_card_id" />
+                app:layout_constraintTop_toBottomOf="@id/feed_card_comment_id" />
 
             <ImageView
-                android:id="@+id/feed_card_dot_separator"
+                android:id="@+id/feed_card_dot_comment_separator"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/separator"
                 android:src="@drawable/dot_small_svgrepo_com"
-                app:layout_constraintLeft_toRightOf="@id/feed_card_position"
-                app:layout_constraintRight_toLeftOf="@+id/feed_card_time"
+                app:layout_constraintLeft_toRightOf="@id/feed_card_comment_position"
+                app:layout_constraintRight_toLeftOf="@+id/feed_card_comment_time"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/feed_card_time"
+                android:id="@+id/feed_card_comment_time"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/time_sample"
                 android:textColor="@color/gray_color"
                 android:textSize="@dimen/p1"
-                app:layout_constraintLeft_toRightOf="@+id/feed_card_dot_separator"
+                app:layout_constraintLeft_toRightOf="@+id/feed_card_dot_comment_separator"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
+                android:id="@+id/feed_card_comment_options"
                 android:layout_width="18dp"
                 android:layout_height="17dp"
                 android:contentDescription="@string/options"
@@ -93,7 +105,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/like_post"
+                android:id="@+id/like_comment_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -101,21 +113,21 @@
                 android:src="@drawable/like_ic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feed_card_content" />
+                app:layout_constraintTop_toBottomOf="@+id/feed_card_comment_content" />
 
             <TextView
-                android:id="@+id/post_card_number_likes"
+                android:id="@+id/post_card_comment_number_likes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="3dp"
                 android:text="@string/sample_likes"
                 android:textColor="@color/gray_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/like_post" />
+                app:layout_constraintRight_toLeftOf="@+id/like_comment_post" />
 
 
             <ImageView
-                android:id="@+id/dislike_post"
+                android:id="@+id/dislike_comment_post"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
@@ -123,22 +135,79 @@
                 android:src="@drawable/dislike_ic"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/feed_card_content" />
+                app:layout_constraintTop_toBottomOf="@+id/feed_card_comment_content" />
 
             <TextView
-                android:id="@+id/post_card_number_dislikes"
+                android:id="@+id/post_card_comment_number_dislikes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="3dp"
                 android:text="@string/sample_likes"
                 android:textColor="@color/gray_color"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/dislike_post" />
+                app:layout_constraintLeft_toRightOf="@+id/dislike_comment_post" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="5dp"
+        app:cardBackgroundColor="@color/bg_app_primary_color"
+        app:layout_constraintBottom_toTopOf="@+id/comment_bottom_card"
+        app:layout_constraintTop_toBottomOf="@+id/feed_card_comment">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/comment_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:listitem="@layout/comment_card" />
 
     </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/comment_bottom_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/bg_app_secondary_color"
+        app:contentPadding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/comment_edit_text"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:autofillHints="@string/text_sample_post"
+                android:backgroundTint="@color/bg_app_secondary_color"
+                android:hint="@string/hint_chat_sample"
+                android:textColorHint="@color/gray_color"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toLeftOf="@+id/comment_creation_send"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TextFields" />
+
+            <ImageView
+                android:id="@+id/comment_creation_send"
+                android:layout_width="48dp"
+                android:layout_height="36dp"
+                android:contentDescription="@string/post"
+                android:src="@drawable/send_ic"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

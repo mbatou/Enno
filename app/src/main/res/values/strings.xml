@@ -17,4 +17,11 @@
     <string name="post">Post</string>
     <string name="options">Options</string>
     <string name="hint_chat_sample">Share your thoughts following the community guidelines.</string>
+    <string name="separator">separator</string>
+    <string name="invite_prompt">Make your friends enjoy our space and share their thoughts !</string>
+    <string name="invite_your_friends">Invite your friends</string>
+    <string name="my_account">My account</string>
+    <string name="my_enno_ano">My enno ano</string>
+    <string name="my_comments">My comments</string>
+    <string name="exit_the_space">Exit the space</string>
 </resources>

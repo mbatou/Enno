@@ -8,7 +8,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.georges.enno.Message;
+import com.georges.enno.ressources.Message;
 import com.georges.enno.R;
 import com.google.firebase.auth.FirebaseAuth;
 
