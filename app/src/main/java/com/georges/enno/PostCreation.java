@@ -44,7 +44,7 @@ public class PostCreation extends AppCompatActivity {
             long postTime = System.currentTimeMillis();
 
             // Create a new Post object with the generated ID, current user's ID, post text, and timestamp
-            Post post = new Post(postId, authorId, postContent, postTime);
+            Post post = new Post(postId, authorId, postContent, postTime,0,0);
 
             // Save the post to the Realtime Database
             assert postId != null;
