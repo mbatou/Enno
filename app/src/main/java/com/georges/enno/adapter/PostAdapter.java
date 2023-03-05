@@ -74,6 +74,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             intent.putExtra("time", post.getPostTime());
             intent.putExtra("likes", post.getLikes());
             intent.putExtra("dislikes", post.getDislikes());
+            intent.putExtra("postId", post.getId());
 
             // Start the new activity
             v.getContext().startActivity(intent);

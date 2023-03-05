@@ -27,6 +27,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         // Sort the comments in descending order based on their post time
         Collections.sort(comments, (p1, p2) -> Long.compare(p2.getPostTime(), p1.getPostTime()));
         this.comments = comments;
+
     }
 
     @NonNull
@@ -39,7 +40,7 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
     @SuppressLint("SetTextI18n")
     @Override
     public void onBindViewHolder(@NonNull CommentAdapter.CommentViewHolder holder, int position) {
-        // Get the post at the current position
+        // Get the comment at the current position
         Comment comment = comments.get(position);
 
         // Bind the data to the views
@@ -61,17 +62,17 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
         });
 
         // Set click listener for the whole item view
-        holder.itemView.setOnClickListener(v -> {
-            // Create intent for the new activity
-            Intent intent = new Intent(v.getContext(), CommentOpened.class);
-            intent.putExtra("content", comment.getContent());
-            intent.putExtra("author", comment.getAuthorId());
-            intent.putExtra("time", comment.getPostTime());
-            intent.putExtra("likes", comment.getLikes());
-
-            // Start the new activity
-            v.getContext().startActivity(intent);
-        });
+//        holder.itemView.setOnClickListener(v -> {
+//            // Create intent for the new activity
+//            Intent intent = new Intent(v.getContext(), CommentOpened.class);
+//            intent.putExtra("content", comment.getContent());
+//            intent.putExtra("author", comment.getAuthorId());
+//            intent.putExtra("time", comment.getPostTime());
+//            intent.putExtra("likes", comment.getLikes());
+//
+//            // Start the new activity
+//            v.getContext().startActivity(intent);
+//        });
     }
 
     @Override

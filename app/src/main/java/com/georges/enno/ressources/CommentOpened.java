@@ -15,19 +15,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.georges.enno.MainActivity;
-import com.georges.enno.PostCreation;
 import com.georges.enno.R;
 import com.georges.enno.adapter.CommentAdapter;
-import com.georges.enno.adapter.PostAdapter;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
-import java.text.BreakIterator;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -51,6 +47,9 @@ public class CommentOpened extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_comment_opened);
 
+        String postId = getIntent().getStringExtra("postId");
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference("comments");
         DatabaseReference commentsRef = FirebaseDatabase.getInstance().getReference().child("comments");
 
@@ -60,7 +59,7 @@ public class CommentOpened extends AppCompatActivity {
             String authorId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             // Generate a new ID for the comment
-            String postId = commentsRef.push().getKey();
+            String commentId = commentsRef.push().getKey();
 
             // Get the comment text from the EditText
             EditText postEditText = findViewById(R.id.comment_edit_text);
@@ -70,13 +69,16 @@ public class CommentOpened extends AppCompatActivity {
             long postTime = System.currentTimeMillis();
 
             // Create a new Post object with the generated ID, current user's ID, post text, and timestamp
-            Post post = new Post(postId, authorId, postContent, postTime,0,0);
+            Post post = new Post(commentId, authorId, postContent, postTime, 0, 0);
 
             // Save the post to the Realtime Database
-            assert postId != null;
-            commentsRef.child(postId).setValue(post);
+            assert commentId != null;
+            commentsRef.child(commentId).setValue(post);
 
             Toast.makeText(this, "Comment published !", Toast.LENGTH_SHORT).show();
+
+            postEditText.setText("");
+
 
         });
 
@@ -129,6 +131,7 @@ public class CommentOpened extends AppCompatActivity {
         long time = intent.getLongExtra("time", 0);
         int likes = intent.getIntExtra("likes", 0);
         int dislikes = intent.getIntExtra("dislikes", 0);
+
 
         // Display the retrieved data in CommentOpened activity layout
         contentTextView.setText(content);
