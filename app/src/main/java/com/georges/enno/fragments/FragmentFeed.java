@@ -36,6 +36,7 @@ public class FragmentFeed extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         mDatabase = FirebaseDatabase.getInstance().getReference("posts");
     }
 

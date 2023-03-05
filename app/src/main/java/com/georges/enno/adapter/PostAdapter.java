@@ -127,4 +127,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             dislikesTextView = itemView.findViewById(R.id.post_card_number_dislikes);
         }
 
-    }}
+    }
+
+
+}
