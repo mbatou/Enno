@@ -11,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.georges.enno.ChatCreation;
 import com.georges.enno.ressources.CommentOpened;
 import com.georges.enno.ressources.Post;
 import com.georges.enno.R;
@@ -56,6 +57,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.dislikeButton.setOnClickListener(view -> {
             post.dislike();
             holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
+        });
+
+        holder.authorTextView.setOnClickListener(v -> {
+            Intent intent = new Intent(v.getContext(),ChatCreation.class);
+            intent.putExtra("author",post.getAuthorId());
+            v.getContext().startActivity(intent);
         });
 
         // Set click listener for the whole item view

@@ -1,10 +1,19 @@
 package com.georges.enno.ressources;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
+
+import com.georges.enno.MainActivity;
 import com.georges.enno.R;
+import com.georges.enno.fragments.FragmentFeed;
+
+import java.util.Objects;
 
 
 public class CommentOpened extends AppCompatActivity {
@@ -13,6 +22,9 @@ public class CommentOpened extends AppCompatActivity {
     TextView timeTextView;
     TextView likesTextView;
     TextView dislikesTextView;
+
+    ImageView goBackButton;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,6 +37,13 @@ public class CommentOpened extends AppCompatActivity {
         timeTextView = findViewById(R.id.feed_card_comment_time);
         likesTextView = findViewById(R.id.post_card_comment_number_likes);
         dislikesTextView = findViewById(R.id.post_card_comment_number_dislikes);
+        goBackButton = findViewById(R.id.go_back_comment);
+
+        goBackButton.setOnClickListener(v -> {
+            Intent intent = new Intent(this, MainActivity.class);
+            intent.putExtra("goToFragmentFeed", true);
+            startActivity(intent);
+        });
 
         // Retrieve the data passed from the previous activity (i.e., PostAdapter)
         Intent intent = getIntent();
@@ -41,6 +60,7 @@ public class CommentOpened extends AppCompatActivity {
         likesTextView.setText(String.format(String.valueOf(likes)));
         dislikesTextView.setText(String.format(String.valueOf(dislikes)));
     }
+
 
     private String getFormattedTime(long postTime) {
         // Format the time as desired

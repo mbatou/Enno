@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_app_secondary_color"
-    tools:context=".Chat_creation">
+    tools:context=".ChatCreation">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/chat_top_header"

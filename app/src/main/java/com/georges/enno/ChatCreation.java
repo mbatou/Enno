@@ -47,13 +47,18 @@ public class ChatCreation extends AppCompatActivity {
         setContentView(R.layout.activity_chat_creation);
 
         backActivity = findViewById(R.id.chat_creation_back);
-        backActivity.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(ChatCreation.this, FragmentChat.class);
-                startActivity(intent);
-            }
+        backActivity.setOnClickListener(v -> {
+            Intent intent = new Intent(ChatCreation.this, FragmentChat.class);
+            startActivity(intent);
         });
+
+        //retrieve authorId of post to create chat
+        TextView authorTextView = findViewById(R.id.chat_creation_idU);
+        Intent intent = getIntent();
+        String author = intent.getStringExtra("author").substring(0, 8);
+
+        // Display the retrieved data in ChatCreation activity layout
+        authorTextView.setText(author);
 
         mCurrentUserId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -115,3 +120,9 @@ public class ChatCreation extends AppCompatActivity {
         mMessageEditText.setText("");
     }
 }
+
+//public class ChatCreation extends AppCompatActivity {
+//
+//    ActivityChatBinding binding;
+//
+//}
