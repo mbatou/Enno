@@ -23,15 +23,20 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
 public class FragmentFeed extends Fragment {
     private final List<Post> posts = new ArrayList<>(); // Define the list of posts
     private DatabaseReference mDatabase;
+    // Define a query to fetch the posts from Firebase in descending order of timestamp
+    Query query = FirebaseDatabase.getInstance().getReference().child("posts").orderByChild("postTime");
+
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -60,7 +65,7 @@ public class FragmentFeed extends Fragment {
         recyclerView.setAdapter(postAdapter); // set the adapter for the RecyclerView
 
         // Read the posts from Firebase Realtime Database
-        mDatabase.addValueEventListener(new ValueEventListener() {
+        query.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
@@ -69,6 +74,9 @@ public class FragmentFeed extends Fragment {
                     Post post = dataSnapshot.getValue(Post.class);
                     posts.add(post);
                 }
+                // Reverse the order of the list
+                Collections.reverse(posts);
+
                 postAdapter.notifyDataSetChanged(); // notify the adapter about the data changes
             }
 
