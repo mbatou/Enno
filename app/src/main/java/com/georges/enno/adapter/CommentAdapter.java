@@ -14,42 +14,39 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.georges.enno.ChatCreation;
 import com.georges.enno.R;
 import com.georges.enno.ressources.Comment;
-import com.georges.enno.ressources.CommentOpened;
 
 import java.util.Collections;
 import java.util.List;
 
 public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentViewHolder> {
-
     private final List<Comment> comments;
 
     public CommentAdapter(List<Comment> comments) {
-        // Sort the comments in descending order based on their post time
-        Collections.sort(comments, (p1, p2) -> Long.compare(p2.getPostTime(), p1.getPostTime()));
+        // Sort the posts in descending order based on their comment time
+        Collections.sort(comments, (p1, p2) -> Long.compare(p2.getCommentPostTime(), p1.getCommentPostTime()));
         this.comments = comments;
-
     }
 
     @NonNull
     @Override
-    public CommentAdapter.CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CommentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.comment_card, parent, false);
-        return new CommentAdapter.CommentViewHolder(view);
+        return new CommentViewHolder(view);
     }
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void onBindViewHolder(@NonNull CommentAdapter.CommentViewHolder holder, int position) {
-        // Get the comment at the current position
+    public void onBindViewHolder(@NonNull CommentViewHolder holder, int position) {
+        // Get the post at the current position
         Comment comment = comments.get(position);
 
         // Bind the data to the views
-        holder.commentTextView.setText(comment.getContent());
-        holder.authorTextView.setText(comment.getAuthorId().substring(0, 8));
-        holder.timeTextView.setText(getFormattedTime(comment.getPostTime()));
+        holder.commentTextView.setText(comment.getCommentContent());
+        holder.authorTextView.setText(comment.getSendId().substring(0, 8));
+        holder.timeTextView.setText(getFormattedTime(comment.getCommentPostTime()));
         holder.likesTextView.setText(Integer.toString(comment.getLikes()));
 
-        // Set click listeners for the like buttons
+        // Set click listeners for the like button
         holder.likeButton.setOnClickListener(view -> {
             comment.like();
             holder.likesTextView.setText(Integer.toString(comment.getLikes()));
@@ -57,22 +54,9 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
 
         holder.authorTextView.setOnClickListener(v -> {
             Intent intent = new Intent(v.getContext(), ChatCreation.class);
-            intent.putExtra("author", comment.getAuthorId());
+            intent.putExtra("author", comment.getSendId());
             v.getContext().startActivity(intent);
         });
-
-        // Set click listener for the whole item view
-//        holder.itemView.setOnClickListener(v -> {
-//            // Create intent for the new activity
-//            Intent intent = new Intent(v.getContext(), CommentOpened.class);
-//            intent.putExtra("content", comment.getContent());
-//            intent.putExtra("author", comment.getAuthorId());
-//            intent.putExtra("time", comment.getPostTime());
-//            intent.putExtra("likes", comment.getLikes());
-//
-//            // Start the new activity
-//            v.getContext().startActivity(intent);
-//        });
     }
 
     @Override
@@ -117,9 +101,5 @@ public class CommentAdapter extends RecyclerView.Adapter<CommentAdapter.CommentV
             likeButton = itemView.findViewById(R.id.like_comment);
             likesTextView = itemView.findViewById(R.id.comment_card_number_likes);
         }
-
     }
 }
-
-
-

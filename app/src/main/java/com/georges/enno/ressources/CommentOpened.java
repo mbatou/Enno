@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -22,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -32,15 +34,8 @@ import java.util.Objects;
 public class CommentOpened extends AppCompatActivity {
 
     private final List<Comment> comments = new ArrayList<>(); // Define the list of comments
-    TextView contentTextView;
-    TextView authorTextView;
-    TextView timeTextView;
-    TextView likesTextView;
-    TextView dislikesTextView;
 
-    ImageView goBackButton;
-    DatabaseReference mDatabase;
-
+    Query mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,37 +43,37 @@ public class CommentOpened extends AppCompatActivity {
         setContentView(R.layout.activity_comment_opened);
 
         String postId = getIntent().getStringExtra("postId");
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference("comments");
+        mDatabase = FirebaseDatabase.getInstance().getReference("comments").orderByChild("getAgainPostId").equalTo(postId);
         DatabaseReference commentsRef = FirebaseDatabase.getInstance().getReference().child("comments");
 
         ImageView addNewComment = findViewById(R.id.comment_creation_send);
         addNewComment.setOnClickListener(v -> {
+
             // Get the current user's ID
-            String authorId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            String sendId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
 
             // Generate a new ID for the comment
             String commentId = commentsRef.push().getKey();
 
+            String getAgainPostId = getIntent().getStringExtra("postId");
+
             // Get the comment text from the EditText
-            EditText postEditText = findViewById(R.id.comment_edit_text);
-            String postContent = postEditText.getText().toString();
+            EditText CommentEditText = findViewById(R.id.comment_edit_text);
+            String commentContent = CommentEditText.getText().toString();
 
             // Get the current timestamp in milliseconds
-            long postTime = System.currentTimeMillis();
+            long commentPostTime = System.currentTimeMillis();
 
             // Create a new Post object with the generated ID, current user's ID, post text, and timestamp
-            Post post = new Post(commentId, authorId, postContent, postTime, 0, 0);
+            Comment comment = new Comment(sendId, commentId, getAgainPostId, commentContent, commentPostTime, 0);
 
             // Save the post to the Realtime Database
             assert commentId != null;
-            commentsRef.child(commentId).setValue(post);
+            commentsRef.child(commentId).setValue(comment);
 
             Toast.makeText(this, "Comment published !", Toast.LENGTH_SHORT).show();
 
-            postEditText.setText("");
-
+            CommentEditText.setText("");
 
         });
 
@@ -88,9 +83,10 @@ public class CommentOpened extends AppCompatActivity {
         CommentAdapter commentAdapter = new CommentAdapter(comments); // create a new instance of CommentAdapter
         recyclerView.setAdapter(commentAdapter); // set the adapter for the RecyclerView
 
-        // Read the posts from Firebase Realtime Database
+        // Read the comments from Firebase Realtime Database
         mDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 comments.clear();
@@ -99,7 +95,6 @@ public class CommentOpened extends AppCompatActivity {
                     comments.add(comment);
                 }
                 commentAdapter.notifyDataSetChanged(); // notify the adapter about the data changes
-
             }
 
             @Override
@@ -109,14 +104,13 @@ public class CommentOpened extends AppCompatActivity {
 
         });
 
-
         // Get references to the views in your CommentOpened activity layout
-        contentTextView = findViewById(R.id.feed_card_comment_content);
-        authorTextView = findViewById(R.id.feed_card_comment_id);
-        timeTextView = findViewById(R.id.feed_card_comment_time);
-        likesTextView = findViewById(R.id.post_card_comment_number_likes);
-        dislikesTextView = findViewById(R.id.post_card_comment_number_dislikes);
-        goBackButton = findViewById(R.id.go_back_comment);
+        TextView contentTextView = findViewById(R.id.feed_card_comment_content);
+        TextView authorTextView = findViewById(R.id.feed_card_comment_id);
+        TextView timeTextView = findViewById(R.id.feed_card_comment_time);
+        TextView likesTextView = findViewById(R.id.post_card_comment_number_likes);
+        TextView dislikesTextView = findViewById(R.id.post_card_comment_number_dislikes);
+        ImageView goBackButton = findViewById(R.id.go_back_comment);
 
         goBackButton.setOnClickListener(v -> {
             Intent intent = new Intent(this, MainActivity.class);
@@ -141,7 +135,6 @@ public class CommentOpened extends AppCompatActivity {
         dislikesTextView.setText(String.format(String.valueOf(dislikes)));
     }
 
-
     private String getFormattedTime(long postTime) {
         // Format the time as desired
         long now = System.currentTimeMillis();
@@ -163,8 +156,6 @@ public class CommentOpened extends AppCompatActivity {
             }
         }
     }
-
-
 }
 
 
