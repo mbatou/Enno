@@ -2,52 +2,64 @@ package com.georges.enno.ressources;
 
 public class Comment {
 
-    private String id;
-    private String authorId;
-    private String content;
-    private long postTime;
+    private String commentId;
+    private String sendId;
+    private String commentContent;
+    private String getAgainPostId;
+    private long commentPostTime;
     private int likes;
 
-    public Comment(String id, String authorId, String content, long postTime, int likes) {
-        this.id = id;
-        this.authorId = authorId;
-        this.content = content;
-        this.postTime = postTime;
-        this.likes = likes;
-    }
     public Comment() {
     }
 
-    public String getId() {
-        return id;
+    public Comment(String sendId,String commentId,String getAgainPostId,String commentContent,long commentPostTime,int likes) {
+        this.sendId = sendId;
+        this.commentId = commentId;
+        this.getAgainPostId = getAgainPostId;
+        this.commentContent = commentContent;
+        this.commentPostTime = commentPostTime;
+        this.likes = likes;
+
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public String getCommentId() {
+        return commentId;
     }
 
-    public String getAuthorId() {
-        return authorId;
+    public void setCommentId(String commentId) {
+        this.commentId = commentId;
     }
 
-    public void setAuthorId(String authorId) {
-        this.authorId = authorId;
+    public String getSendId() {
+        return sendId;
     }
 
-    public String getContent() {
-        return content;
+    public void setSendId(String sendId) {
+        this.sendId = sendId;
     }
 
-    public void setContent(String content) {
-        this.content = content;
+    public String getCommentContent() {
+        return commentContent;
     }
 
-    public long getPostTime() {
-        return postTime;
+    public void setCommentContent(String commentContent) {
+        this.commentContent = commentContent;
     }
 
-    public void setPostTime(long postTime) {
-        this.postTime = postTime;
+    public String getGetAgainPostId() {
+        return getAgainPostId;
+    }
+
+    public void setGetAgainPostId(String getAgainPostId) {
+        this.getAgainPostId = getAgainPostId;
+    }
+
+    public long getCommentPostTime() {
+        return commentPostTime;
+    }
+
+    public void setCommentPostTime(long commentPostTime) {
+        this.commentPostTime = commentPostTime;
     }
 
     public int getLikes() {
