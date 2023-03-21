@@ -23,6 +23,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -34,7 +35,7 @@ public class CommentOpened extends AppCompatActivity {
 
     private final List<Comment> comments = new ArrayList<>(); // Define the list of comments
 
-    DatabaseReference mDatabase;
+    Query mDatabase;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,7 +43,7 @@ public class CommentOpened extends AppCompatActivity {
         setContentView(R.layout.activity_comment_opened);
 
         String postId = getIntent().getStringExtra("postId");
-        mDatabase = FirebaseDatabase.getInstance().getReference("comments");
+        mDatabase = FirebaseDatabase.getInstance().getReference("comments").orderByChild("getAgainPostId").equalTo(postId);
         DatabaseReference commentsRef = FirebaseDatabase.getInstance().getReference().child("comments");
 
         ImageView addNewComment = findViewById(R.id.comment_creation_send);
@@ -85,6 +86,7 @@ public class CommentOpened extends AppCompatActivity {
         // Read the comments from Firebase Realtime Database
         mDatabase.addValueEventListener(new ValueEventListener() {
             @SuppressLint("NotifyDataSetChanged")
+
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 comments.clear();
@@ -93,7 +95,6 @@ public class CommentOpened extends AppCompatActivity {
                     comments.add(comment);
                 }
                 commentAdapter.notifyDataSetChanged(); // notify the adapter about the data changes
-
             }
 
             @Override
