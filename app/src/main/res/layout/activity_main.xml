@@ -12,6 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="70dp"
         app:cardBackgroundColor="@color/bg_app_primary_color"
+        app:contentPadding="10dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,6 +20,28 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/games_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="@string/game_title"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+            <ImageView
+                android:id="@+id/games_icon"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:contentDescription="@string/game_title"
+                android:src="@drawable/dice_ic"
+                app:layout_constraintLeft_toLeftOf="@id/games_title"
+                app:layout_constraintRight_toRightOf="@id/games_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
             <ImageView
                 android:layout_width="44dp"
@@ -29,6 +52,30 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/credit_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:text="@string/credits"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent" />
+
+            <TextView
+                android:id="@+id/credit_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/credit_sample"
+                android:textColor="@color/orange_app"
+                android:textSize="21sp"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="@+id/credit_title"
+                app:layout_constraintRight_toRightOf="@+id/credit_title"
+                app:layout_constraintTop_toTopOf="parent" />
+
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -48,10 +95,10 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/bg_app_primary_color"
+        app:itemIconTint="@color/gray_color"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:itemIconTint="@color/gray_color"
         app:menu="@menu/bottom_navigation_menu" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

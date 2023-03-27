@@ -15,6 +15,8 @@
     <color name="bg_app_primary_color">#343540</color>
     <color name="bg_app_secondary_color">#282a36</color>
     <color name="gray_color">#878b99</color>
+    <color name="green_color">#01a47b</color>
+    <color name="red_color">#d42e72</color>
 
 
 </resources>
