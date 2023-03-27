@@ -14,7 +14,6 @@ public class Message {
 
     public Message(String text, String userId, long timestamp) {
         this.text = text;
-
         this.userId = userId;
         this.timestamp = timestamp;
     }

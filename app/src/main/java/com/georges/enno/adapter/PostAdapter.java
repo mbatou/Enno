@@ -7,17 +7,27 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.georges.enno.ChatCreation;
+import com.georges.enno.fragments.FragmentFeed;
+import com.georges.enno.ressources.ChatRequest;
+import com.georges.enno.ressources.ChatRoom;
 import com.georges.enno.ressources.CommentOpened;
 import com.georges.enno.ressources.Post;
 import com.georges.enno.R;
+import com.georges.enno.ressources.Recharge;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder> {
     private final List<Post> posts;
@@ -60,9 +70,46 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         });
 
         holder.authorTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(),ChatCreation.class);
-            intent.putExtra("author",post.getAuthorId());
-            v.getContext().startActivity(intent);
+            Intent intent = new Intent(v.getContext(), ChatCreation.class);
+            intent.putExtra("author", post.getAuthorId());
+
+            // Get the current user's ID
+            String userId1 = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+            String userId2 = post.getAuthorId();
+
+            // Get a reference to the "chat_requests" node in your database
+            DatabaseReference chatRequestsRef = FirebaseDatabase.getInstance().getReference("chat_requests");
+
+            // Check if the user has enough credits
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            db.collection("users").document(userId1).get().addOnSuccessListener(documentSnapshot -> {
+                int credits = Objects.requireNonNull(documentSnapshot.getLong("credits")).intValue();
+                if (credits >= 1) {
+                    // Deduct one credit from the user's account
+                    db.collection("users").document(userId1).update("credits", credits - 1);
+
+                    ChatRequest chatRequest = new ChatRequest(userId1, userId2, System.currentTimeMillis(), "Chat request sent pending !");
+                    chatRequestsRef.push().setValue(chatRequest);
+
+                    // Get a reference to the "chat_rooms" node in your database
+                    DatabaseReference chatRoomsRef = FirebaseDatabase.getInstance().getReference("chat_rooms");
+
+                    // Create a new chat room object
+                    ChatRoom chatRoom = new ChatRoom(userId1, userId2);
+
+                    // Add the chat room to the database
+                    chatRoomsRef.push().setValue(chatRoom);
+
+                    Toast.makeText(v.getContext(), "Request for chat has been sent", Toast.LENGTH_SHORT).show();
+
+
+                } else {
+                    // Show an error message to the user
+                    Intent recharge = new Intent(v.getContext(), Recharge.class);
+                    v.getContext().startActivity(recharge);
+                }
+            });
+
         });
 
         // Set click listener for the whole item view

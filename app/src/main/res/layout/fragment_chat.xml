@@ -19,7 +19,7 @@
             app:contentPadding="20dp"
             app:layout_constraintTop_toTopOf="parent">
 
-            <ListView
+            <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/chat_listview"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

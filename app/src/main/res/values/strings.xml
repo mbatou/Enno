@@ -24,4 +24,10 @@
     <string name="my_enno_ano">My enno ano</string>
     <string name="my_comments">My comments</string>
     <string name="exit_the_space">Exit the space</string>
+    <string name="credits">Credits</string>
+    <string name="credit_sample">000</string>
+    <string name="game_title">Games</string>
+    <string name="approve">Approve</string>
+    <string name="decline">Decline</string>
+    <string name="new_chat_request_text">New chat request</string>
 </resources>
