@@ -36,7 +36,6 @@
                 android:layout_marginStart="10dp"
                 android:text="@string/anonymousid"
                 android:textColor="@color/white"
-
                 android:textStyle="bold"
                 app:layout_constraintLeft_toRightOf="@id/message_send_ic"
                 app:layout_constraintTop_toTopOf="parent" />

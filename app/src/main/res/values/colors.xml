@@ -17,6 +17,7 @@
     <color name="gray_color">#878b99</color>
     <color name="green_color">#01a47b</color>
     <color name="red_color">#d42e72</color>
+    <color name="bg_app_tertiary_color">#23232f</color>
 
 
 </resources>

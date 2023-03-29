@@ -30,4 +30,9 @@
     <string name="approve">Approve</string>
     <string name="decline">Decline</string>
     <string name="new_chat_request_text">New chat request</string>
+    <string name="balance_credit">Balance credit</string>
+    <string name="recharge">10 credits</string>
+    <string name="recharge_more">20 credits</string>
+    <string name="chats">Chats</string>
+    <string name="request">Requests</string>
 </resources>

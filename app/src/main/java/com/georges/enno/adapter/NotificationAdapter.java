@@ -49,7 +49,7 @@ public class NotificationAdapter extends RecyclerView.Adapter<NotificationAdapte
 //            intent.putExtra("postId", notification.getId());
 
             // Start the new activity
-            v.getContext().startActivity(intent);
+//            v.getContext().startActivity(intent);
         });
     }
 

@@ -29,6 +29,8 @@ public class Login extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
+        boolean isFirstTime = prefs.getBoolean("isFirstTime", true);
 
         enterButton = findViewById(R.id.login_enter_the_space);
         enterButton.setOnClickListener(v -> FirebaseAuth.getInstance().signInAnonymously().addOnCompleteListener(this, task -> {
@@ -50,15 +52,17 @@ public class Login extends AppCompatActivity {
                 userData.put("credits", 10);
                 db.collection("users").document(userId).set(userData);
 
-                // Save the user ID to SharedPreferences
-                SharedPreferences prefs = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                SharedPreferences.Editor editor = prefs.edit();
-                editor.putString("userId", userId);
-                editor.apply();
-                SendToTheNextActivity();
+                if (isFirstTime) {
+                    // Show layout activity
+                    SharedPreferences.Editor editor = prefs.edit();
+                    editor.putBoolean("isFirstTime", false);
+                    editor.apply();
+                } else {
+                    // Skip layout activity
+                    SendToTheNextActivity();
+                }
 
             } else {
-
                 // Handle sign-in failure
                 Log.e("TAG", "signInAnonymously:failure", task.getException());
             }

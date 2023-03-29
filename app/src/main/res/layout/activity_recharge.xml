@@ -5,6 +5,70 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/bg_app_secondary_color"
+    android:padding="20dp"
     tools:context=".ressources.Recharge">
+
+    <ImageView
+        android:id="@+id/send_back_ic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/back"
+        android:src="@drawable/back_ic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/balance_credit_id"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/balance_credit"
+        android:textColor="@color/white"
+        android:textSize="@dimen/H2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/credit_balance"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/credit_sample"
+        android:textColor="@color/orange_app"
+        android:textSize="48sp"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/balance_credit_id" />
+
+    <Button
+        android:id="@+id/btn_recharge"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/card_bg_rounded"
+        android:drawableStart="@drawable/coins_ic"
+        android:hint="@string/recharge"
+        android:padding="16dp"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/H2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credit_balance" />
+
+    <Button
+        android:id="@+id/btn_transfer"
+        android:layout_width="180dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/card_bg_rounded"
+        android:drawableStart="@drawable/coins_ic"
+        android:hint="@string/recharge_more"
+        android:padding="16dp"
+        android:textColorHint="@color/white"
+        android:textSize="@dimen/H2"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/credit_balance" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

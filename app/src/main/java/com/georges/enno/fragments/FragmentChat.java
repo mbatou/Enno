@@ -14,9 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.georges.enno.R;
 import com.georges.enno.adapter.ChatRoomAdapter;
-import com.georges.enno.adapter.PostAdapter;
 import com.georges.enno.ressources.ChatRequest;
-import com.georges.enno.ressources.Post;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -91,5 +89,4 @@ public View onCreateView(LayoutInflater inflater, ViewGroup container,
     return view;
 
     }
-
 }
