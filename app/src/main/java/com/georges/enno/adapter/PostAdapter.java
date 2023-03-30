@@ -2,6 +2,8 @@ package com.georges.enno.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.georges.enno.ChatCreation;
+import com.georges.enno.MainActivity;
 import com.georges.enno.fragments.FragmentFeed;
 import com.georges.enno.ressources.ChatRequest;
 import com.georges.enno.ressources.ChatRoom;
@@ -62,11 +66,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         holder.likeButton.setOnClickListener(view -> {
             post.like();
             holder.likesTextView.setText(Integer.toString(post.getLikes()));
+            int color = ContextCompat.getColor(view.getContext(), R.color.orange_app);
+            holder.likesTextView.setTextColor(color);
+
         });
 
         holder.dislikeButton.setOnClickListener(view -> {
             post.dislike();
             holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
+            int color = ContextCompat.getColor(view.getContext(), R.color.orange_app);
+            holder.dislikesTextView.setTextColor(color);
+
         });
 
         holder.authorTextView.setOnClickListener(v -> {

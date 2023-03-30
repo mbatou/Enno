@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         TextView creditWallet = findViewById(R.id.credit_wallet);
+        ImageView logoEnno = findViewById(R.id.logo_enno_main);
 
         // Get the current user's ID
         String userId = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
@@ -75,6 +76,11 @@ public class MainActivity extends AppCompatActivity {
 
             performFragmentTransaction(fragment);
             return true;
+        });
+
+        logoEnno.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, MainActivity.class);
+            startActivity(intent);
         });
 
     }
