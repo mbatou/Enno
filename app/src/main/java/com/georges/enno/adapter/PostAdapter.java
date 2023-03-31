@@ -2,12 +2,13 @@ package com.georges.enno.adapter;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
+import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,15 +16,11 @@ import androidx.annotation.NonNull;
 import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.georges.enno.ChatCreation;
-import com.georges.enno.MainActivity;
-import com.georges.enno.fragments.FragmentFeed;
 import com.georges.enno.ressources.ChatRequest;
 import com.georges.enno.ressources.ChatRoom;
 import com.georges.enno.ressources.CommentOpened;
 import com.georges.enno.ressources.Post;
 import com.georges.enno.R;
-import com.georges.enno.ressources.Recharge;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -65,62 +62,75 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         // Set click listeners for the like and dislike buttons
         holder.likeButton.setOnClickListener(view -> {
             post.like();
-            holder.likesTextView.setText(Integer.toString(post.getLikes()));
             int color = ContextCompat.getColor(view.getContext(), R.color.orange_app);
             holder.likesTextView.setTextColor(color);
-
+            holder.likeButton.setEnabled(post.isLiked());
+            holder.likesTextView.setText(Integer.toString(post.getLikes()));
         });
 
         holder.dislikeButton.setOnClickListener(view -> {
             post.dislike();
-            holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
             int color = ContextCompat.getColor(view.getContext(), R.color.orange_app);
             holder.dislikesTextView.setTextColor(color);
-
+            holder.dislikeButton.setEnabled(post.isDisliked());
+            holder.dislikesTextView.setText(Integer.toString(post.getDislikes()));
         });
 
-        holder.authorTextView.setOnClickListener(v -> {
-            Intent intent = new Intent(v.getContext(), ChatCreation.class);
-            intent.putExtra("author", post.getAuthorId());
+        holder.optionMenu.setOnClickListener(v -> {
+            PopupMenu popupMenu = new PopupMenu(v.getContext(), holder.optionMenu, Gravity.END);
 
-            // Get the current user's ID
-            String userId1 = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
-            String userId2 = post.getAuthorId();
+            //Add options to the menu
+            popupMenu.getMenu().add(Menu.NONE, 0, 0, "Request message");
+            popupMenu.getMenu().add(Menu.NONE, 1, 1, "Report post");
 
-            // Get a reference to the "chat_requests" node in your database
-            DatabaseReference chatRequestsRef = FirebaseDatabase.getInstance().getReference("chat_requests");
+            popupMenu.setOnMenuItemClickListener(item -> {
+                int id = item.getItemId();
+                if (id == 0) {
+                    //Request message is clicked
+                    // Get the current user's ID
+                    String userId1 = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
+                    String userId2 = post.getAuthorId();
 
-            // Check if the user has enough credits
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            db.collection("users").document(userId1).get().addOnSuccessListener(documentSnapshot -> {
-                int credits = Objects.requireNonNull(documentSnapshot.getLong("credits")).intValue();
-                if (credits >= 1) {
-                    // Deduct one credit from the user's account
-                    db.collection("users").document(userId1).update("credits", credits - 1);
+                    // Get a reference to the "chat_requests" node in your database
+                    DatabaseReference chatRequestsRef = FirebaseDatabase.getInstance().getReference("chat_requests");
 
-                    ChatRequest chatRequest = new ChatRequest(userId1, userId2, System.currentTimeMillis(), "Chat request sent pending !");
-                    chatRequestsRef.push().setValue(chatRequest);
+                    // Check if the user has enough credits
+                    FirebaseFirestore db = FirebaseFirestore.getInstance();
+                    db.collection("users").document(userId1).get().addOnSuccessListener(documentSnapshot -> {
+                        int credits = Objects.requireNonNull(documentSnapshot.getLong("credits")).intValue();
+                        if (credits >= 1) {
+                            // Deduct one credit from the user's account
+                            db.collection("users").document(userId1).update("credits", credits - 1);
 
-                    // Get a reference to the "chat_rooms" node in your database
-                    DatabaseReference chatRoomsRef = FirebaseDatabase.getInstance().getReference("chat_rooms");
+                            ChatRequest chatRequest = new ChatRequest(userId1, userId2, System.currentTimeMillis(), "Chat request sent pending !");
+                            chatRequestsRef.push().setValue(chatRequest);
 
-                    // Create a new chat room object
-                    ChatRoom chatRoom = new ChatRoom(userId1, userId2);
+                            // Get a reference to the "chat_rooms" node in your database
+                            DatabaseReference chatRoomsRef = FirebaseDatabase.getInstance().getReference("chat_rooms");
 
-                    // Add the chat room to the database
-                    chatRoomsRef.push().setValue(chatRoom);
+                            // Get the current timestamp in milliseconds
+                            long chatTime = System.currentTimeMillis();
 
-                    Toast.makeText(v.getContext(), "Request for chat has been sent", Toast.LENGTH_SHORT).show();
+                            // Create a new chat room object
+                            ChatRoom chatRoom = new ChatRoom(userId1, userId2, chatTime);
 
+                            // Add the chat room to the database
+                            chatRoomsRef.push().setValue(chatRoom);
+                        }
+                        //Toast back
+                        Toast.makeText(v.getContext(), "Request to send", Toast.LENGTH_SHORT).show();
+                    });
 
                 } else {
-                    // Show an error message to the user
-                    Intent recharge = new Intent(v.getContext(), Recharge.class);
-                    v.getContext().startActivity(recharge);
+                    Toast.makeText(v.getContext(), "Report to send", Toast.LENGTH_SHORT).show();
                 }
+                return false;
             });
 
+            popupMenu.show();
+
         });
+
 
         // Set click listener for the whole item view
         holder.itemView.setOnClickListener(v -> {
@@ -167,6 +177,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     static class PostViewHolder extends RecyclerView.ViewHolder {
 
         ImageView likeButton;
+        ImageView optionMenu;
         ImageView dislikeButton;
         TextView likesTextView;
         TextView dislikesTextView;
@@ -183,6 +194,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             dislikeButton = itemView.findViewById(R.id.dislike_post);
             likesTextView = itemView.findViewById(R.id.post_card_number_likes);
             dislikesTextView = itemView.findViewById(R.id.post_card_number_dislikes);
+            optionMenu = itemView.findViewById(R.id.post_card_options);
         }
 
     }

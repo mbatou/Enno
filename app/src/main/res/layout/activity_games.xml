@@ -4,6 +4,150 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/bg_app_primary_color"
+    android:padding="20dp"
     tools:context=".Games">
+
+    <ImageView
+        android:id="@+id/send_back_ic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/back"
+        android:src="@drawable/back_ic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/games_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:text="@string/game_title"
+        android:textColor="@color/white"
+        android:textSize="@dimen/H1"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/games_icon"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:contentDescription="@string/game_title"
+        android:src="@drawable/games_ic"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/games_title" />
+
+    <TextView
+        android:id="@+id/gaming_welcome_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/gaming_welcome"
+        android:textColor="@color/gray_color"
+        android:textSize="@dimen/H2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/games_icon" />
+
+    <TextView
+        android:id="@+id/coming_soon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="@string/coming_soon"
+        android:textColor="@color/orange_app"
+        android:textSize="@dimen/H1"
+        android:textStyle="bold"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/gaming_welcome_text" />
+
+    <Button
+        android:id="@+id/tic_tac_toe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:background="@drawable/card_bg_rounded"
+        android:drawableEnd="@drawable/arrow_right_ic"
+        android:hint="@string/tic_tac_toe"
+        android:textColorHint="@color/orange_app"
+        android:textSize="@dimen/H2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/coming_soon" />
+
+    <Button
+        android:id="@+id/quiz_tournament"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/card_bg_rounded"
+        android:drawableEnd="@drawable/arrow_right_ic"
+        android:hint="@string/quizz_tournament"
+        android:textColorHint="@color/orange_app"
+        android:textSize="@dimen/H2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tic_tac_toe" />
+
+    <Button
+        android:id="@+id/this_or_that"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/card_bg_rounded"
+        android:drawableEnd="@drawable/arrow_right_ic"
+        android:hint="@string/this_or_that"
+        android:textColorHint="@color/orange_app"
+        android:textSize="@dimen/H2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/quiz_tournament" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/invite_friend_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardBackgroundColor="@color/bg_app_secondary_color"
+        app:cardCornerRadius="10dp"
+        app:contentPadding="10dp"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/invite_friends_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/invite_your_friends"
+                android:textColor="@color/white"
+                android:textSize="@dimen/H1"
+                android:textStyle="bold"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/invite_friends_prompt"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center"
+                android:text="@string/invite_prompt"
+                android:textColor="@color/white"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/invite_friends_title" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

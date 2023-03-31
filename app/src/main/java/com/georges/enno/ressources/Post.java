@@ -6,17 +6,38 @@ public class Post {
     private String content;
     private long postTime;
     private int likes;
+    private boolean isLiked;
     private int dislikes;
+    private boolean isDisliked;
 
-    public Post(String id, String authorId, String content, long postTime, int likes, int dislikes) {
+    public Post(String id, String authorId, String content, long postTime,  int likes,boolean isLiked, int dislikes, boolean isDisliked) {
         this.id = id;
         this.authorId = authorId;
         this.content = content;
         this.postTime = postTime;
         this.likes = likes;
+        this.isLiked = isLiked; // Initialize the variable to false
         this.dislikes = dislikes;
+        this.isDisliked = isDisliked; // Initialize the variable to false
     }
+
     public Post() {
+    }
+
+    public boolean isLiked() {
+        return isLiked;
+    }
+
+    public void setLiked(boolean liked) {
+        isLiked = liked;
+    }
+
+    public boolean isDisliked() {
+        return isDisliked;
+    }
+
+    public void setDisliked(boolean disliked) {
+        isDisliked = disliked;
     }
 
     public String getId() {
@@ -68,10 +89,14 @@ public class Post {
     }
 
     public void like() {
-        likes++;
+        if (!isLiked) {
+            likes++;
+            isLiked = true;}
     }
 
     public void dislike() {
-        dislikes++;
+        if (!isDisliked) {
+            dislikes++;
+            isDisliked = true;}
     }
 }

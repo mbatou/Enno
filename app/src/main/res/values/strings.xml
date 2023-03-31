@@ -34,5 +34,21 @@
     <string name="recharge">10 credits</string>
     <string name="recharge_more">20 credits</string>
     <string name="chats">Chats</string>
-    <string name="request">Requests</string>
+    <string name="request">Chat requests</string>
+    <string name="number_of_requests">(0)</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">First Fragment</string>
+    <string name="second_fragment_label">Second Fragment</string>
+    <string name="next">Next</string>
+    <string name="previous">Previous</string>
+
+    <string name="hello_first_fragment">Hello first fragment</string>
+    <string name="hello_second_fragment">Hello second fragment. Arg: %1$s</string>
+    <string name="prompt_chat_requests">You can approve or reject the requests for chats. Make sure of your chat and report the one spamming you. Don\'t share personal informations.</string>
+    <string name="decline_all_the_requests">Decline all the requests</string>
+    <string name="gaming_welcome">Welcome to the Gaming Enno Universe. Play, Enjoy and Earn your credits ☺️.</string>
+    <string name="coming_soon">Coming soon !</string>
+    <string name="tic_tac_toe">Tic Tac Toe</string>
+    <string name="quizz_tournament">Quiz tournament</string>
+    <string name="this_or_that">This or that ?</string>
 </resources>

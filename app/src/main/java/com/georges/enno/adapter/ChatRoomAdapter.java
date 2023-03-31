@@ -9,16 +9,20 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.georges.enno.R;
-import com.georges.enno.ressources.ChatRequest;
+import com.georges.enno.ressources.ChatRoom;
+
 import java.util.List;
+
 
 public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRoomViewHolder> {
 
-    private final List<ChatRequest> ChatRequests;
 
-    public ChatRoomAdapter(List<ChatRequest> ChatRequests) {
-        this.ChatRequests = ChatRequests;
+    private final List<ChatRoom> chatRooms;
+
+    public ChatRoomAdapter(List<ChatRoom> chatRooms) {
+        this.chatRooms = chatRooms;
     }
+
 
     @NonNull
     @Override
@@ -29,24 +33,28 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
 
     @Override
     public void onBindViewHolder(@NonNull ChatRoomAdapter.ChatRoomViewHolder holder, int position) {
-        // Get the chatRequest at the current position
-        ChatRequest chatRequest = ChatRequests.get(position);
+        // Get the ChatRooms at the current position
+        ChatRoom chatRoom = chatRooms.get(position);
 
         // Bind the data to the views
-        holder.requestUserId.setText(chatRequest.getUserId1().substring(0, 8));
-        holder.requestTime.setText(getFormattedTime(chatRequest.getRequestTime()));
-        holder.requestStatus.setText(chatRequest.getStatus());
+        holder.chatUserId.setText(chatRoom.getUserId1().substring(0, 8));
+        holder.chatTime.setText(getFormattedTime(chatRoom.getChatTime()));
+
+        // Set click listener for the whole item view
+        holder.itemView.setOnClickListener(v -> {
+
+        });
 
     }
 
     @Override
     public int getItemCount() {
-        return ChatRequests.size();
+        return chatRooms.size();
     }
 
-    private String getFormattedTime(long postTime) {
+    private String getFormattedTime(long chatTime) {
         long now = System.currentTimeMillis();
-        long diff = now - postTime;
+        long diff = now - chatTime;
 
         if (diff < 5 * 60 * 1000) { // 5 minutes
             return "now";
@@ -65,17 +73,18 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
         }
     }
 
+
     static class ChatRoomViewHolder extends RecyclerView.ViewHolder {
 
-        TextView requestUserId;
-        TextView requestTime;
-        TextView requestStatus;
+        TextView chatUserId;
+        TextView chatTime;
+        TextView approveChat;
 
         public ChatRoomViewHolder(@NonNull View itemView) {
             super(itemView);
-            requestUserId = itemView.findViewById(R.id.chat_card_id);
-            requestTime = itemView.findViewById(R.id.chat_card_time);
-            requestStatus = itemView.findViewById(R.id.chat_card_content);
+            chatUserId = itemView.findViewById(R.id.chat_card_id);
+            chatTime = itemView.findViewById(R.id.chat_card_time);
+            approveChat = itemView.findViewById(R.id.approve_requests);
         }
     }
 }

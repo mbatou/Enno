@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="5dp"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginTop="5dp">
 
     <androidx.cardview.widget.CardView
         android:id="@+id/notifications_card"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:cardBackgroundColor="@color/bg_app_primary_color"
+        app:cardBackgroundColor="@color/bg_app_secondary_color"
         app:contentPadding="20dp"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
@@ -26,7 +26,6 @@
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/enter_the_space"
                 android:src="@drawable/send_ic"
-                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -41,17 +40,6 @@
                 app:layout_constraintLeft_toRightOf="@id/message_send_ic"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/chat_card_content"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="10dp"
-                android:layout_marginTop="12dp"
-                android:text="@string/text_sample_post"
-                android:textColor="@color/white"
-                app:layout_constraintLeft_toRightOf="@id/message_send_ic"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/chat_card_id" />
 
             <TextView
                 android:id="@+id/chat_card_time"
@@ -62,6 +50,36 @@
                 android:textSize="@dimen/p1"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/approve_requests"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/approbation_btn_yes"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="@string/approve"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chat_card_time" />
+
+            <TextView
+                android:id="@+id/decline_requests"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
+                android:background="@drawable/approbation_btn"
+                android:gravity="center"
+                android:paddingVertical="5dp"
+                android:text="@string/decline"
+                android:textColor="@color/white"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/chat_card_time" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
