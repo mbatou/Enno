@@ -11,39 +11,34 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.georges.enno.R;
 import com.georges.enno.ressources.ChatRoom;
 
+
 import java.util.List;
 
 
 public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRoomViewHolder> {
 
-
     private final List<ChatRoom> chatRooms;
 
     public ChatRoomAdapter(List<ChatRoom> chatRooms) {
+
+        // Sort the chatRooms in descending order based on their post time
         this.chatRooms = chatRooms;
     }
-
 
     @NonNull
     @Override
     public ChatRoomAdapter.ChatRoomViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.chat_card, parent, false);
-        return new ChatRoomAdapter.ChatRoomViewHolder(view);
+        return new ChatRoomViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ChatRoomAdapter.ChatRoomViewHolder holder, int position) {
-        // Get the ChatRooms at the current position
         ChatRoom chatRoom = chatRooms.get(position);
 
         // Bind the data to the views
-        holder.chatUserId.setText(chatRoom.getUserId1().substring(0, 8));
+        holder.userId.setText(chatRoom.getUserId1().substring(0, 8));
         holder.chatTime.setText(getFormattedTime(chatRoom.getChatTime()));
-
-        // Set click listener for the whole item view
-        holder.itemView.setOnClickListener(v -> {
-
-        });
 
     }
 
@@ -52,9 +47,9 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
         return chatRooms.size();
     }
 
-    private String getFormattedTime(long chatTime) {
+    private String getFormattedTime(long postTime) {
         long now = System.currentTimeMillis();
-        long diff = now - chatTime;
+        long diff = now - postTime;
 
         if (diff < 5 * 60 * 1000) { // 5 minutes
             return "now";
@@ -73,18 +68,18 @@ public class ChatRoomAdapter extends RecyclerView.Adapter<ChatRoomAdapter.ChatRo
         }
     }
 
-
     static class ChatRoomViewHolder extends RecyclerView.ViewHolder {
 
-        TextView chatUserId;
+        TextView userId;
         TextView chatTime;
-        TextView approveChat;
+
 
         public ChatRoomViewHolder(@NonNull View itemView) {
             super(itemView);
-            chatUserId = itemView.findViewById(R.id.chat_card_id);
+            userId = itemView.findViewById(R.id.chat_card_id);
             chatTime = itemView.findViewById(R.id.chat_card_time);
-            approveChat = itemView.findViewById(R.id.approve_requests);
+
         }
+
     }
 }

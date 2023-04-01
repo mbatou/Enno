@@ -46,7 +46,7 @@ public class FragmentChat extends Fragment {
 
 
     // Define a query to fetch the chatRequests from Firebase
-    Query query = FirebaseDatabase.getInstance().getReference().child("chat_requests").orderByChild("userId2");
+    Query query = FirebaseDatabase.getInstance().getReference().child("chat_rooms").orderByChild("userId2");
 
 
     public FragmentChat() {
@@ -57,7 +57,7 @@ public class FragmentChat extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference("chat_requests");
+        mDatabase = FirebaseDatabase.getInstance().getReference("chat_rooms");
 
     }
 
@@ -98,7 +98,7 @@ public class FragmentChat extends Fragment {
         });
 
         FirebaseDatabase database = FirebaseDatabase.getInstance();
-        DatabaseReference chatRequestsRef = database.getReference("chat_requests");
+        DatabaseReference chatRequestsRef = database.getReference("chat_rooms");
 
         textViewNumRequests = view.findViewById(R.id.number_chats_requests);
 

@@ -10,15 +10,15 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.georges.enno.R;
 import com.georges.enno.ressources.ChatRequest;
-
 import java.util.List;
 
 public class ChatRequestAdapter extends RecyclerView.Adapter<ChatRequestAdapter.ChatRequestViewHolder> {
 
-    private final List<ChatRequest> ChatRequests;
 
-    public ChatRequestAdapter(List<ChatRequest> ChatRequests) {
-        this.ChatRequests = ChatRequests;
+    private final List<ChatRequest> chatRequests;
+
+    public ChatRequestAdapter(List<ChatRequest> chatRequests) {
+        this.chatRequests = chatRequests;
     }
 
     @NonNull
@@ -31,21 +31,24 @@ public class ChatRequestAdapter extends RecyclerView.Adapter<ChatRequestAdapter.
     @Override
     public void onBindViewHolder(@NonNull ChatRequestAdapter.ChatRequestViewHolder holder, int position) {
         // Get the chatRequest at the current position
-        ChatRequest chatRequest = ChatRequests.get(position);
+        ChatRequest chatRequest = chatRequests.get(position);
 
         // Bind the data to the views
-        holder.requestUserId.setText(chatRequest.getUserId1().substring(0, 8));
-        holder.requestTime.setText(getFormattedTime(chatRequest.getRequestTime()));
-        // approve or decline the chat request
-        holder.approveChat.setOnClickListener(v -> {
+        holder.receiverId.setText(chatRequest.getReceiverId().substring(0, 8));
+        holder.requestTime.setText(getFormattedTime(chatRequest.getChatTime()));
 
+        // Approve or decline chatRequests
+        holder.approveChat.setOnClickListener(v -> {
+        });
+
+        holder.declineChat.setOnClickListener(v -> {
         });
 
     }
 
     @Override
     public int getItemCount() {
-        return ChatRequests.size();
+        return chatRequests.size();
     }
 
     private String getFormattedTime(long postTime) {
@@ -71,15 +74,20 @@ public class ChatRequestAdapter extends RecyclerView.Adapter<ChatRequestAdapter.
 
     static class ChatRequestViewHolder extends RecyclerView.ViewHolder {
 
-        TextView requestUserId;
+        TextView receiverId;
         TextView requestTime;
         TextView approveChat;
+        TextView declineChat;
+
 
         public ChatRequestViewHolder(@NonNull View itemView) {
             super(itemView);
-            requestUserId = itemView.findViewById(R.id.chat_card_id);
+            receiverId = itemView.findViewById(R.id.chat_card_id);
             requestTime = itemView.findViewById(R.id.chat_card_time);
             approveChat = itemView.findViewById(R.id.approve_requests);
+            declineChat = itemView.findViewById(R.id.decline_requests);
+
         }
+
     }
 }

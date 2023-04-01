@@ -21,9 +21,11 @@ import com.georges.enno.ressources.ChatRoom;
 import com.georges.enno.ressources.CommentOpened;
 import com.georges.enno.ressources.Post;
 import com.georges.enno.R;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import java.util.Collections;
@@ -80,47 +82,45 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             PopupMenu popupMenu = new PopupMenu(v.getContext(), holder.optionMenu, Gravity.END);
 
             //Add options to the menu
-            popupMenu.getMenu().add(Menu.NONE, 0, 0, "Request message");
+            popupMenu.getMenu().add(Menu.NONE, 0, 0, "Request chat");
             popupMenu.getMenu().add(Menu.NONE, 1, 1, "Report post");
 
             popupMenu.setOnMenuItemClickListener(item -> {
                 int id = item.getItemId();
+
                 if (id == 0) {
-                    //Request message is clicked
                     // Get the current user's ID
                     String userId1 = Objects.requireNonNull(FirebaseAuth.getInstance().getCurrentUser()).getUid();
                     String userId2 = post.getAuthorId();
 
                     // Get a reference to the "chat_requests" node in your database
                     DatabaseReference chatRequestsRef = FirebaseDatabase.getInstance().getReference("chat_requests");
+                    String chatRoomId = chatRequestsRef.push().getKey();
 
                     // Check if the user has enough credits
                     FirebaseFirestore db = FirebaseFirestore.getInstance();
                     db.collection("users").document(userId1).get().addOnSuccessListener(documentSnapshot -> {
                         int credits = Objects.requireNonNull(documentSnapshot.getLong("credits")).intValue();
-                        if (credits >= 1) {
+                        if (credits >= 0) {
                             // Deduct one credit from the user's account
                             db.collection("users").document(userId1).update("credits", credits - 1);
 
-                            ChatRequest chatRequest = new ChatRequest(userId1, userId2, System.currentTimeMillis(), "Chat request sent pending !");
+                            // Create the chat request and save it in the database
+                            ChatRequest chatRequest = new ChatRequest(userId1, userId2, chatRoomId, System.currentTimeMillis(), "Chat request sent pending !");
                             chatRequestsRef.push().setValue(chatRequest);
 
                             // Get a reference to the "chat_rooms" node in your database
                             DatabaseReference chatRoomsRef = FirebaseDatabase.getInstance().getReference("chat_rooms");
 
-                            // Get the current timestamp in milliseconds
-                            long chatTime = System.currentTimeMillis();
-
                             // Create a new chat room object
-                            ChatRoom chatRoom = new ChatRoom(userId1, userId2, chatTime);
+                            ChatRoom chatRoom = new ChatRoom(userId1, userId2, System.currentTimeMillis());
 
                             // Add the chat room to the database
                             chatRoomsRef.push().setValue(chatRoom);
-                        }
-                        //Toast back
-                        Toast.makeText(v.getContext(), "Request to send", Toast.LENGTH_SHORT).show();
-                    });
 
+                            Toast.makeText(v.getContext(), "Request for chat has been sent", Toast.LENGTH_SHORT).show();
+                        }
+                    });
                 } else {
                     Toast.makeText(v.getContext(), "Report to send", Toast.LENGTH_SHORT).show();
                 }

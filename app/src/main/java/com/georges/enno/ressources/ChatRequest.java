@@ -2,42 +2,53 @@ package com.georges.enno.ressources;
 
 public class ChatRequest {
 
-    String userId1 ;
-    String userId2 ;
-    long requestTime;
+    String receiverId ;
+    String senderId ;
+    String chatRoomId ;
+
+    long chatTime;
     String status;
-    public ChatRequest(String userId1, String userId2, long requestTime, String status) {
-        this.userId1 = userId1;
-        this.userId2 = userId2;
-        this.requestTime = requestTime;
+    public ChatRequest(String receiverId, String senderId, String chatRoomId, long chatTime, String status) {
+        this.receiverId = receiverId;
+        this.senderId = senderId;
+        this.chatRoomId = chatRoomId;
+        this.chatTime = chatTime;
         this.status = status;
     }
 
     public ChatRequest() {
     }
 
-    public String getUserId1() {
-        return userId1;
+    public String getReceiverId() {
+        return receiverId;
     }
 
-    public void setUserId1(String userId1) {
-        this.userId1 = userId1;
+    public void setReceiverId(String receiverId) {
+        this.receiverId = receiverId;
     }
 
-    public String getUserId2() {
-        return userId2;
+    public String getSenderIdid() {
+        return senderId;
     }
 
-    public void setUserId2(String userId2) {
-        this.userId2 = userId2;
+    public void setSenderIdid(String senderId) {
+        this.senderId = senderId;
     }
 
-    public long getRequestTime() {
-        return requestTime;
+    public String getChatRoom() {
+        return chatRoomId;
     }
 
-    public void setRequestTime(long requestTime) {
-        this.requestTime = requestTime;
+    public void setChatRoom(String chatRoomId) {
+        this.chatRoomId = chatRoomId;
+    }
+
+    public long getChatTime() {
+        return chatTime;
+    }
+
+    public void setChatTime(long chatTime) {
+        this.chatTime = chatTime;
     }
 
     public String getStatus() {
